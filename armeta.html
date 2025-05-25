@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Surat Cinta Untuk Armeta Norma</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #ffd1dc, #ffe6f0);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      text-align: center;
+      color: #4a148c;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #c2185b;
+      animation: bounce 1s infinite alternate;
+    }
+
+    @keyframes bounce {
+      to {
+        transform: translateY(-10px);
+      }
+    }
+
+    button {
+      background-color: #f06292;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 30px;
+      font-size: 1.2em;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    #pesan {
+      margin-top: 30px;
+      font-size: 1.2em;
+      background-color: #ffffffcc;
+      padding: 25px;
+      border-radius: 20px;
+      display: none;
+      color: #4e0d3a;
+      max-width: 800px;
+      line-height: 1.8;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Untuk Armeta Norma</h1>
+  <p>Ada sesuatu dari hati ini yang pengen aku ungkapin...</p>
+  <button onclick="tampilkanPesan()">Klik Di Sini</button>
+  <div id="pesan">
+    <p>Hai Armeta,</p>
+
+    <p>Entah harus mulai dari mana, tapi yang jelas… kamu selalu punya tempat spesial di pikiranku. Setiap hariku rasanya ada aja momen di mana aku senyum sendiri karena inget kamu. Bukan karena hal besar, tapi justru hal-hal kecil—cara kamu ngomong, ketawa, bahkan saat kamu lagi cuek pun somehow tetep bikin aku pengen dekat.</p>
+
+    <p>Awalnya aku pikir ini cuma kekaguman biasa. Tapi makin hari, makin aku sadar… aku nungguin notifikasi dari kamu lebih dari notifikasi apapun. Aku lebih seneng ngobrol random sama kamu daripada scroll sosmed berjam-jam. Dan setiap kali kamu cerita, meskipun panjang, aku ngerasa kayak lagi denger playlist favorit yang gak pernah ngebosenin.</p>
+
+    <p>Armeta, kamu lucu, kamu kuat, kamu unik, dan kamu beda. Kamu adalah campuran dari ketegasan yang tenang dan kelembutan yang bikin nyaman. Dan jujur aja, aku gak tahu lagi cara yang lebih halus buat bilang… kalau aku suka kamu. Lebih dari sekadar teman biasa. Lebih dari sekadar “akrab”. Aku pengen jadi alasan kamu senyum, tempat kamu cerita, dan orang pertama yang kamu cari saat hari kamu melelahkan.</p>
+
+    <p>Jadi, gimana kalau kita mulai cerita kita sendiri? Cerita yang kadang norak, kadang lucu, tapi selalu jujur. Cerita dua orang yang gak sempurna, tapi saling bikin nyaman. Cerita Tan dan Armeta.</p>
+
+    <p>Dengan segala rasa deg-degan tapi tulus,</p>
+    <p><strong>Tan</strong></p>
+  </div>
+
+  <canvas id="confetti"></canvas>
+
+  <script>
+    function tampilkanPesan() {
+      document.getElementById('pesan').style.display = 'block';
+      confettiStart();
+    }
+
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    let pieces = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function confettiStart() {
+      pieces = [];
+      for (let i = 0; i < 150; i++) {
+        pieces.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * -canvas.height,
+          size: Math.random() * 8 + 4,
+          speed: Math.random() * 4 + 2,
+          color: `hsl(${Math.random() * 360}, 100%, 70%)`
+        });
+      }
+      animate();
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let p of pieces) {
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x, p.y, p.size, p.size);
+        p.y += p.speed;
+        if (p.y > canvas.height) p.y = -10;
+      }
+      requestAnimationFrame(animate);
+    }
+  </script>
+</body>
+</html>
